@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DaeyangFlow</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <!-- Icon: Lucide (bộ icon mặc định của shadcn/ui), ISC license -->
+    <header class="head">
+      <div class="brand">
+        <span class="logo">
+          <svg class="icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </span>
+        <div>
+          <h1>DaeyangFlow</h1>
+          <span class="ver">Bulk Image cho Google Flow · v1.1</span>
+        </div>
+      </div>
+    </header>
+
+    <div id="conn" class="conn conn--off">
+      <span class="dot"></span>
+      <span id="connText">Đang kiểm tra kết nối…</span>
+    </div>
+
+    <section class="block">
+      <label class="lbl" for="prompts">Danh sách prompt</label>
+      <p class="hint">Mỗi dòng là một prompt. Dán bao nhiêu dòng cũng được.</p>
+      <textarea
+        id="prompts"
+        rows="6"
+        placeholder="A red bicycle on a rainy street&#10;A watercolor fox in a forest&#10;..."
+      ></textarea>
+      <div class="row">
+        <button id="loadTxt" class="btn btn--sm">
+          <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          Tải file .txt
+        </button>
+        <input id="txtFile" type="file" accept=".txt" hidden />
+        <span id="count" class="count">0 prompt</span>
+      </div>
+    </section>
+
+    <section class="block grid2">
+      <div>
+        <label class="lbl" for="folder">Thư mục con (trong Downloads)</label>
+        <input id="folder" type="text" value="DaeyangFlow" />
+      </div>
+      <div class="serial">
+        <label class="lbl">Đánh số</label>
+        <label class="switch">
+          <input id="serial" type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <p class="hint folder-note">
+      Ảnh lưu vào <b>Downloads / [tên trên]</b>. Chrome không cho chọn ổ đĩa khác.
+    </p>
+
+    <section class="block">
+      <label class="lbl">Nghỉ ngẫu nhiên giữa các ảnh (giây)</label>
+      <div class="row delays">
+        <input id="delayMin" type="number" min="0" value="5" />
+        <span>đến</span>
+        <input id="delayMax" type="number" min="0" value="15" />
+      </div>
+      <p class="hint">Giúp tránh bị Google coi là bot. Để 0–0 nếu muốn chạy liền.</p>
+    </section>
+
+    <div class="actions">
+      <button id="start" class="btn btn--primary">
+        <svg class="icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        Bắt đầu
+      </button>
+      <button id="stop" class="btn btn--danger" disabled>
+        <svg class="icon" viewBox="0 0 24 24"><rect width="14" height="14" x="5" y="5" rx="2"/></svg>
+        Dừng
+      </button>
+    </div>
+
+    <div id="tip" class="tip">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span>Trước khi chạy: <b>đóng DevTools (F12)</b> trên tab Flow, và <b>để yên thanh vàng</b> "đang gỡ lỗi" khi nó hiện.</span>
+    </div>
+
+    <section class="block">
+      <div class="qhead">
+        <span class="lbl">Hàng đợi</span>
+        <button id="retryAll" class="btn btn--sm" hidden>
+          <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Tạo lại ảnh lỗi
+        </button>
+        <span id="progress" class="count">—</span>
+      </div>
+      <div class="pbar"><div id="pfill" class="pfill"></div></div>
+      <ul id="queue" class="queue"></ul>
+    </section>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

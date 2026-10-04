@@ -1,0 +1,165 @@
+/* DaeyangFlow — giao diện theo phong cách shadcn/ui (zinc, dark) */
+:root {
+  --bg: #09090b;
+  --card: #0f0f12;
+  --muted-bg: #18181b;
+  --line: #27272a;
+  --text: #fafafa;
+  --muted: #a1a1aa;
+  --primary: #fafafa;
+  --primary-fg: #18181b;
+  --ring: #52525b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 16px 16px 32px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.icon { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon--sm { width: 14px; height: 14px; }
+
+/* ---- Header ---- */
+.head { margin-bottom: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo {
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border-radius: var(--radius);
+  background: var(--primary); color: var(--primary-fg);
+}
+.logo .icon { width: 18px; height: 18px; }
+.head h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.2px; }
+.ver { font-size: 11px; color: var(--muted); }
+
+/* ---- Connection banner ---- */
+.conn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: var(--radius);
+  font-size: 12px; margin-bottom: 16px;
+  border: 1px solid var(--line); background: var(--card);
+}
+.conn .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.conn--on .dot { background: var(--green); }
+.conn--off .dot { background: var(--red); }
+
+/* ---- Blocks ---- */
+.block { margin-bottom: 16px; }
+.lbl { display: block; font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+.hint { margin: 2px 0 6px; font-size: 11px; color: var(--muted); }
+
+textarea, input[type="text"], input[type="number"] {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 10px;
+  font: inherit; outline: none; resize: vertical;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+textarea:focus, input:focus { border-color: var(--ring); box-shadow: 0 0 0 2px rgba(161, 161, 170, 0.2); }
+
+.row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.count { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+.grid2 { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; }
+.serial { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+
+/* switch */
+.switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: var(--line); border-radius: 999px; transition: 0.2s;
+}
+.slider::before {
+  content: ""; position: absolute; height: 16px; width: 16px;
+  left: 2px; top: 2px; background: var(--bg);
+  border-radius: 50%; transition: 0.2s;
+}
+.switch input:checked + .slider { background: var(--primary); }
+.switch input:checked + .slider::before { transform: translateX(16px); }
+
+.delays { gap: 8px; }
+.delays input { width: 70px; text-align: center; }
+.delays span { color: var(--muted); font-size: 12px; }
+
+.folder-note { margin-top: -6px; margin-bottom: 16px; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  height: 36px; padding: 0 14px; border-radius: 6px;
+  font: inherit; font-weight: 500; cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn:hover:not(:disabled) { background: var(--muted-bg); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn--sm { height: 28px; padding: 0 10px; font-size: 12px; }
+.btn--primary { flex: 1; border-color: var(--primary); background: var(--primary); color: var(--primary-fg); }
+.btn--primary:hover:not(:disabled) { background: #e4e4e7; }
+.btn--danger { color: var(--red); }
+.btn--icon { width: 26px; height: 26px; padding: 0; border-color: transparent; color: var(--muted); }
+.btn--icon:hover:not(:disabled) { color: var(--text); }
+.actions { display: flex; gap: 8px; margin-bottom: 12px; }
+
+/* ---- Tip ---- */
+.tip {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 11px; color: var(--muted);
+  border: 1px solid var(--line); background: var(--card);
+  border-radius: var(--radius); padding: 9px 11px; margin-bottom: 18px;
+  line-height: 1.5;
+}
+.tip .icon { color: var(--amber); margin-top: 1px; }
+.tip b { color: var(--text); font-weight: 500; }
+
+/* ---- Queue ---- */
+.qhead { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.qhead .lbl { margin: 0; }
+.qhead .count { margin-left: auto; }
+
+.pbar { height: 4px; background: var(--muted-bg); border-radius: 999px; overflow: hidden; margin-bottom: 12px; }
+.pfill { height: 100%; width: 0%; background: var(--primary); transition: width 0.4s ease; }
+
+.queue { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.qitem {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 8px 7px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 12px;
+}
+.qitem.generating { border-color: var(--ring); }
+.qitem .num { color: var(--muted); min-width: 20px; text-align: right; font-variant-numeric: tabular-nums; }
+.qitem .txt { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.tag {
+  font-size: 10px; font-weight: 500; padding: 2px 8px;
+  border-radius: 999px; white-space: nowrap;
+  border: 1px solid var(--line); color: var(--muted);
+}
+.tag.generating { color: var(--text); }
+.tag.done { color: var(--green); border-color: rgba(34, 197, 94, 0.35); }
+.tag.error, .tag.timeout { color: var(--red); border-color: rgba(239, 68, 68, 0.35); }
+
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+[hidden] { display: none !important; }
